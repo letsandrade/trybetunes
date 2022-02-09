@@ -55,19 +55,20 @@ class Login extends Component {
       <div className="albumlist-container">
         <h3>{msgSuccess}</h3>
         <section className="albumlist">
-          {currSearch.map((item) => (
-            <Link
-              data-testid={ `link-to-album-${item.collectionId}` }
-              to={ `/album/${item.collectionId}` }
-              key={ item.collectionId }
-            >
-              <div>
-                <img src={ item.artworkUrl100 } alt={ item.collectionName } />
-                <h3>{ item.artistName }</h3>
-                <h4>{ item.collectionName }</h4>
-              </div>
-            </Link>
-          ))}
+          {currSearch
+            .map(({ artistName, artworkUrl100, collectionName, collectionId }) => (
+              <Link
+                data-testid={ `link-to-album-${collectionId}` }
+                to={ `/album/${collectionId}` }
+                key={ collectionId }
+              >
+                <div>
+                  <img src={ artworkUrl100 } alt={ collectionName } />
+                  <h3>{ artistName }</h3>
+                  <h4>{ collectionName }</h4>
+                </div>
+              </Link>
+            ))}
         </section>
       </div>
     );
