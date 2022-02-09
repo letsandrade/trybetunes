@@ -85,11 +85,11 @@ class Login extends Component {
     if (isLoading === true) return <Loading />;
 
     return (
-      <div className="searchpage-container">
+      <div className="searchpage-container" data-testid="page-search">
         <Header />
         <p>search page</p>
         <form>
-          <input
+          <input 
             type="text"
             name="searchBox"
             value={ searchBox }
