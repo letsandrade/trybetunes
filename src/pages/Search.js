@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
+import searchAlbumsAPIs from '../services/searchAlbumsAPI';
 
 class Login extends Component {
   state = {
     searchBox: '',
     isButtonDisabled: true,
+    isLoading: false,
+    currSearch: [],
+    searchedArtist: '',
   }
 
   handleInputChange = ({ target }) => {
-    console.log(target);
     const { name, value } = target;
     this.setState({
       [name]: value,
@@ -29,10 +34,57 @@ class Login extends Component {
     }
   }
 
-  render() {
-    const { searchBox, isButtonDisabled } = this.state;
+  handleButtonClick = async (event) => {
+    event.preventDefault();
+    const { searchBox } = this.state;
+    this.setState({ searchBox: '', isLoading: true });
+    const searchResult = await searchAlbumsAPIs(searchBox);
+
+    this.setState({
+      isLoading: false,
+      currSearch: searchResult,
+      searchedArtist: searchBox,
+    });
+    console.log(searchResult);
+  }
+
+  prepareResultsForStage = () => {
+    const { currSearch, searchedArtist } = this.state;
+    const msgSuccess = `Resultado de álbuns de: ${searchedArtist}`;
     return (
-      <div data-testid="page-search">
+      <div className="albumlist-container">
+        <h3>{msgSuccess}</h3>
+        <section className="albumlist">
+          {currSearch.map((item) => (
+            <Link
+              data-testid={ `link-to-album-${item.collectionId}` }
+              to={ `/album/${item.collectionId}` }
+              key={ item.collectionId }
+            >
+              <div>
+                <img src={ item.artworkUrl100 } alt={ item.collectionName } />
+                <h3>{ item.artistName }</h3>
+                <h4>{ item.collectionName }</h4>
+              </div>
+            </Link>
+          ))}
+        </section>
+      </div>
+    );
+  }
+
+  render() {
+    const {
+      searchBox,
+      isButtonDisabled,
+      isLoading,
+      currSearch,
+      // searchedArtist,
+    } = this.state;
+    if (isLoading === true) return <Loading />;
+
+    return (
+      <div className="searchpage-container">
         <Header />
         <p>search page</p>
         <form>
@@ -52,6 +104,11 @@ class Login extends Component {
             Pesquisar
           </button>
         </form>
+        <div className="showing-area">
+          {currSearch.length > 0
+            ? this.prepareResultsForStage()
+            : 'Nenhum álbum foi encontrado'}
+        </div>
       </div>
     );
   }
