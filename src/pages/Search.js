@@ -89,7 +89,7 @@ class Login extends Component {
         <Header />
         <p>search page</p>
         <form>
-          <input 
+          <input
             type="text"
             name="searchBox"
             value={ searchBox }
