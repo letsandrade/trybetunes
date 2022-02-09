@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 
 class Login extends Component {
   render() {
     return (
       <div data-testid="page-search">
-        search page
+        <Header />
+        <p>search page</p>
       </div>
     );
   }
