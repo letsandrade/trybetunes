@@ -12,13 +12,10 @@ class Login extends Component {
   }
 
   handleInputChange = ({ target }) => {
-    // console.log('o que esta voltando do input change', target.value);
     const { name, value } = target;
-    // console.log(target);
     this.setState({
       [name]: value,
     }, this.validateName);
-    // console.log(`mockuser ${name}:${value}`);
   }
 
   validateName = () => {
