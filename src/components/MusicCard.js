@@ -1,29 +1,43 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+// import Loading from './Loading';
+// import { addSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends Component {
   render() {
-    const { songs } = this.props;
+    const { songs, loading, favoriteSongs, handleFavorite } = this.props;
+    // const { loading, favoriteSongs } = this.state;
     return (
       <div className="music-card-container">
-        {songs.map((song, index) => {
-          if (song.previewUrl) {
-            return (
-              <section key={ index }>
-                <p className="songTitle">{ song.trackName }</p>
-                <audio data-testid="audio-component" src={ song.previewUrl } controls>
-                  <track kind="captions" />
-                  O seu navegador não suporta o elemento
-                  {' '}
-                  <code>audio</code>
-                  .
-                </audio>
-
-              </section>
-            );
-          }
-          return null;
-        })}
+        { loading ? <p>Carregando...</p> : (
+          songs.map((song) => {
+            if (song.previewUrl) {
+              return (
+                // essa implementação foi dada pela trybe no requisito, troquei o src pela info que precisava
+                <section key={ song.trackId }>
+                  <p className="songTitle">{ song.trackName }</p>
+                  <audio data-testid="audio-component" src={ song.previewUrl } controls>
+                    <track kind="captions" />
+                    O seu navegador não suporta o elemento
+                    {' '}
+                    <code>audio</code>
+                    .
+                  </audio>
+                  <label htmlFor={ song.trackId }>
+                    Favorita
+                    <input
+                      type="checkbox"
+                      data-testid={ `checkbox-music-${song.trackId}` }
+                      checked={ favoriteSongs.some((el) => el.trackId === song.trackId) }
+                      id={ song.trackId }
+                      onChange={ (event) => handleFavorite(song, event) }
+                    />
+                  </label>
+                </section>
+              );
+            }
+            return null;
+          }))}
       </div>
     );
   }
@@ -32,5 +46,8 @@ class MusicCard extends Component {
 
 MusicCard.propTypes = {
   songs: propTypes.arrayOf(propTypes.object).isRequired,
+  loading: propTypes.bool.isRequired,
+  favoriteSongs: propTypes.arrayOf(propTypes.object).isRequired,
+  handleFavorite: propTypes.func.isRequired,
 };
 export default MusicCard;
