@@ -73,11 +73,7 @@ class Album extends Component {
 }
 
 Album.propTypes = {
-  match: propTypes.shape({
-    params: propTypes.shape({
-      id: propTypes.string,
-    }),
-  }).isRequired,
+  match: propTypes.shape(propTypes.object).isRequired,
 };
 
 // ref match: https://v5.reactrouter.com/web/api/match

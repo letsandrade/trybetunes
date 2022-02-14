@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-// import Loading from './Loading';
-// import { addSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends Component {
   render() {
     const { songs, loading, favoriteSongs, handleFavorite } = this.props;
-    // const { loading, favoriteSongs } = this.state;
     return (
       <div className="music-card-container">
         { loading ? <p>Carregando...</p> : (
