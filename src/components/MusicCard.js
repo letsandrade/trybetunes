@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
 class MusicCard extends Component {
   render() {
@@ -29,4 +30,7 @@ class MusicCard extends Component {
 }
 // inicialmente estava fazendo o map no comp. album, mas tava dando errado pq renderizava sempre um componente a mais. decidi fazer no card, porem tava dando erro, foi onde entendi que tava pegando um elemento sem a propriedade previewurl, peguei a ideia de fazer a condicional com retorno null no pr do rafael
 
+MusicCard.propTypes = {
+  songs: propTypes.arrayOf(propTypes.object).isRequired,
+};
 export default MusicCard;

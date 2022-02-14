@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
@@ -38,6 +39,14 @@ class Album extends Component {
     );
   }
 }
+
+Album.propTypes = {
+  match: propTypes.shape({
+    params: propTypes.shape({
+      id: propTypes.string,
+    }),
+  }).isRequired,
+};
 
 // ref match: https://v5.reactrouter.com/web/api/match
 export default Album;
