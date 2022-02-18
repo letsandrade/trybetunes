@@ -10,7 +10,7 @@ class MusicCard extends Component {
           songs.map((song) => {
             if (song.previewUrl) {
               return (
-                // essa implementação foi dada pela trybe no requisito, troquei o src pela info que precisava
+                // essa implementação audio foi dada pela trybe no requisito, troquei o src pela info que precisava
                 <section key={ song.trackId }>
                   <p className="songTitle">{ song.trackName }</p>
                   <audio data-testid="audio-component" src={ song.previewUrl } controls>
