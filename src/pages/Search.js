@@ -61,8 +61,9 @@ class Login extends Component {
                 data-testid={ `link-to-album-${collectionId}` }
                 to={ `/album/${collectionId}` }
                 key={ collectionId }
+                className="black-glass"
               >
-                <div>
+                <div className="albumlist-content">
                   <img src={ artworkUrl100 } alt={ collectionName } />
                   <h3>{ artistName }</h3>
                   <h4>{ collectionName }</h4>
@@ -87,24 +88,28 @@ class Login extends Component {
     return (
       <div className="searchpage-container" data-testid="page-search">
         <Header />
-        <p>search page</p>
-        <form>
-          <input
-            type="text"
-            name="searchBox"
-            value={ searchBox }
-            data-testid="search-artist-input"
-            onChange={ this.handleInputChange }
-          />
-          <button
-            type="button"
-            data-testid="search-artist-button"
-            disabled={ isButtonDisabled }
-            onClick={ this.handleButtonClick }
-          >
-            Pesquisar
-          </button>
-        </form>
+        <div className="searchbar">
+          <h3>Pesquisar artista, música ou álbum</h3>
+          <form>
+            <input
+              type="text"
+              name="searchBox"
+              value={ searchBox }
+              className="name-input"
+              data-testid="search-artist-input"
+              onChange={ this.handleInputChange }
+            />
+            <button
+              type="button"
+              className="submit-button"
+              data-testid="search-artist-button"
+              disabled={ isButtonDisabled }
+              onClick={ this.handleButtonClick }
+            >
+              Pesquisar
+            </button>
+          </form>
+        </div>
         <div className="showing-area">
           {currSearch.length > 0
             ? this.prepareResultsForStage()

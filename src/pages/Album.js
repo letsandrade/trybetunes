@@ -64,7 +64,7 @@ class Album extends Component {
         { loading
           ? (<Loading />)
           : (
-            <div>
+            <div className="album-container">
               <h3 data-testid="artist-name">{ artist }</h3>
               <h4 data-testid="album-name">{ album }</h4>
               <MusicCard

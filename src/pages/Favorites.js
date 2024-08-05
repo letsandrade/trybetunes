@@ -67,12 +67,15 @@ class Favorites extends Component {
       <section data-testid="page-favorites">
         <Header />
         { (loading) && <Loading />}
-        <MusicCard
-          songs={ songs }
-          handleFavorite={ this.handleFavorite }
-          loading={ loading }
-          favoriteSongs={ favoriteSongs }
-        />
+        <div className="favorites-container">
+          <h2>favoritos</h2>
+          <MusicCard
+            songs={ songs }
+            handleFavorite={ this.handleFavorite }
+            loading={ loading }
+            favoriteSongs={ favoriteSongs }
+          />
+        </div>
       </section>
     );
   }

@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
+import logo from '../assets/logo.jpg';
+
 class Login extends Component {
   state = {
     userName: '',
@@ -50,25 +52,34 @@ class Login extends Component {
     if (isLoading === true) return <Loading />;
     if (toRedirect === true) return <Redirect to="/search" />;
     return (
-      <div data-testid="page-login">
-        <form>
-          <input
-            type="text"
-            name="userName"
-            value={ userName }
-            onChange={ this.handleInputChange }
-            data-testid="login-name-input"
-          />
-          <button
-            type="submit"
-            name="LoginButton"
-            data-testid="login-submit-button"
-            disabled={ isButtonDisabled }
-            onClick={ this.handleLoginButton }
-          >
-            Entrar
-          </button>
-        </form>
+      <div className="login-container" data-testid="page-login">
+        <div className="black-glass login-content">
+          <img src={ logo } alt="logo" className="logo" />
+          <form className="form-container">
+            <label className="input-label" htmlFor="userName">
+              Nome
+              <input
+                id="userName"
+                type="text"
+                name="userName"
+                className="name-input"
+                value={ userName }
+                onChange={ this.handleInputChange }
+                data-testid="login-name-input"
+              />
+            </label>
+            <button
+              type="submit"
+              name="LoginButton"
+              className="submit-button"
+              data-testid="login-submit-button"
+              disabled={ isButtonDisabled }
+              onClick={ this.handleLoginButton }
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

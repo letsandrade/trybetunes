@@ -11,7 +11,7 @@ class MusicCard extends Component {
             if (song.previewUrl) {
               return (
                 // essa implementação audio foi dada pela trybe no requisito, troquei o src pela info que precisava
-                <section key={ song.trackId }>
+                <section className="music-card" key={ song.trackId }>
                   <p className="songTitle">{ song.trackName }</p>
                   <audio data-testid="audio-component" src={ song.previewUrl } controls>
                     <track kind="captions" />
@@ -20,8 +20,7 @@ class MusicCard extends Component {
                     <code>audio</code>
                     .
                   </audio>
-                  <label htmlFor={ song.trackId }>
-                    Favorita
+                  <label className="favorite" htmlFor={ song.trackId }>
                     <input
                       type="checkbox"
                       data-testid={ `checkbox-music-${song.trackId}` }
@@ -29,6 +28,7 @@ class MusicCard extends Component {
                       id={ song.trackId }
                       onChange={ (event) => handleFavorite(song, event) }
                     />
+                    Favorita
                   </label>
                 </section>
               );
